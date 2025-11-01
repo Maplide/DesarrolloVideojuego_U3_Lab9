@@ -8,6 +8,8 @@ public class PlayerInteractor : MonoBehaviour
     private Camera _mainCamera;
     private PlayerInputActions _inputActions;
 
+    private GameObject _current;
+
     private void Awake()
     {
         _mainCamera = Camera.main;
@@ -62,5 +64,15 @@ public class PlayerInteractor : MonoBehaviour
                 // Aquí la lógica para mostrar "[E] Interactuar" en la UI.
             }
         }
+    }
+
+    private void SetFocus(GameObject target)
+    {
+        GameEvents.TriggerTargetFocused(_current);
+    }
+
+    private void ClearFocus()
+    {
+        GameEvents.TriggerTargetLost(_current);
     }
 }
