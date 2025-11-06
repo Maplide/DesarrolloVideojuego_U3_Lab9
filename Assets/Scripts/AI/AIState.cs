@@ -22,4 +22,21 @@ public abstract class AIState
     public abstract void OnEnter();
     public abstract void UpdateState();
     public abstract void OnExit();
+
+    protected bool EnsureRefs()
+    {
+        if (m_controller == null) return false;
+
+        if (m_agent == null)
+            m_agent = m_controller.GetComponent<UnityEngine.AI.NavMeshAgent>();
+
+        if (m_playerTransform == null)
+        {
+            var go = GameObject.FindGameObjectWithTag("Player");
+            if (go != null) m_playerTransform = go.transform;
+            // si no hay Player, igual seguimos; StunState no lo necesita
+        }
+
+        return m_agent != null; // para StunState basta con tener agent
+    }
 }

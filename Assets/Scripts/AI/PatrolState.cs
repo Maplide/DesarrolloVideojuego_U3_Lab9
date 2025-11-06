@@ -3,7 +3,7 @@ using UnityEngine;
 public class PatrolState : AIState
 {
     public PatrolState(AIController controller) : base(controller) { }
-
+    
     private int _currentWaypointIndex = 0;
 
     public override void OnEnter()

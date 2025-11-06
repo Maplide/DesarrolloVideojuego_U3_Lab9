@@ -3,7 +3,7 @@ using UnityEngine;
 public class ChaseState : AIState
 {
     public ChaseState(AIController controller) : base(controller) { }
-
+    
     public override void OnEnter()
     {
         Debug.Log("Entrando en estado de Persecución.");
