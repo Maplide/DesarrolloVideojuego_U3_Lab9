@@ -6,6 +6,12 @@ using UnityEngine;
 /// 
 public class AIController : MonoBehaviour
 {
+    [Header("AI Settings")]
+    public Transform[] waypoints; // Para que el Diseñador asigne la ruta
+    public float patrolSpeed = 2f;
+    public float chaseSpeed = 5f;
+    public float detectionRadius = 10f;
+    public float loseSightRadius = 15f;
     private AIState _currentState;
 
     private void Awake()
