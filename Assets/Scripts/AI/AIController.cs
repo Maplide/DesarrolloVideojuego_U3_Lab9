@@ -17,7 +17,7 @@ public class AIController : MonoBehaviour
     private void Awake()
     {
         // Inicializamos el estado inicial de la IA, por ejemplo, patrullaje.
-        changeState(new PatrolState(this));
+        ChangeState(new PatrolState(this));
     }
 
     private void Update()
@@ -27,7 +27,7 @@ public class AIController : MonoBehaviour
         _currentState?.UpdateState();
     }
 
-    public void changeState(AIState newState)
+    public void ChangeState(AIState newState)
     {
         // Maneja la transición entre estados
         _currentState?.OnExit();
