@@ -11,6 +11,10 @@ public class GameManager : MonoBehaviour
 
     [Header("Gameplay Settings")]
     [SerializeField] private int _objectivesToWin = 3;
+
+    //Modificado - Guia13
+    public GameLogic Logic {get; private set;}//Propiedad pública para acceder a la logica
+    
     private int _objectivesCompleted = 0;
 
     // =========================
@@ -24,6 +28,9 @@ public class GameManager : MonoBehaviour
     {
         if (Instance != null && Instance != this) { Destroy(gameObject); return; }
         Instance = this;
+
+        //Modificado - Guia13
+        Logic = new GameLogic(_objectivesToWin);
     }
 
     private void OnEnable()
@@ -44,18 +51,24 @@ public class GameManager : MonoBehaviour
         StartCoroutine(CountdownTimer());
     }
 
+    //Modificado - Guia13
     private void HandleObjectiveActivated()
     {
         if (_currentState != GameState.Playing) return;
 
-        _objectivesCompleted++;
-        Debug.Log($"Objetivo completado. Progreso: {_objectivesCompleted}/{_objectivesToWin}");
+        // Llamada a completar el objetivo, agregada desde la imagen
+        Logic.CompleteObjective();
 
-        if (_objectivesCompleted >= _objectivesToWin)
+        // Mostrar el progreso como en la imagen
+        Debug.Log($"Objetivo completado. Progreso: {Logic.ObjectivesCompleted}/{Logic.ObjectivesToWin}");
+
+        // Verificar si se ha alcanzado la condición de victoria
+        if (Logic.IsVictoryConditionMet)
         {
             ChangeState(GameState.Victory);
         }
     }
+
 
     public void ChangeState(GameState newState)
     {
