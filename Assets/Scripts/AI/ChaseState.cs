@@ -21,6 +21,9 @@ public class ChaseState : AIState
 
         // 2. Lógica del estado: perseguir al jugador.
         m_agent.destination = m_playerTransform.position;
+
+        //CODIGO INEFICIENTE
+        //m_agent.destination = GameObject.FindGameObjectWithTag("Player").transform.position;
     }
 
     public override void OnExit() { }
